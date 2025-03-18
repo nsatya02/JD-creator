@@ -45,6 +45,10 @@ def generate_job_description(role, skills, experience_level, years_experience=No
     Structure with these sections:
     - Job Title (include seniority based on experience)
     - Company Overview
+    BeamX TechLabs Pvt Ltd. is a leading technology company specialised in software development and IT
+    solutions. With a focus on innovation and cutting-edge technologies, we strive to provide exceptional
+    solutions to our clients across various industries. Join our dynamic team and contribute to the
+    development of groundbreaking software applications
     - Position Summary
     - Key Responsibilities (include experience-specific tasks if applicable)
     - Required Skills and Qualifications ({exp_section}include specific experience requirements)
