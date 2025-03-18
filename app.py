@@ -2,7 +2,7 @@ import streamlit as st
 from groq import Groq
 from datetime import datetime
 
-client = Groq(api_key="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")
+client = Groq(api_key="api-key")
 
 # Custom CSS for better styling
 st.markdown("""
