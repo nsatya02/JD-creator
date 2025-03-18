@@ -2,7 +2,7 @@ import streamlit as st
 from groq import Groq
 from datetime import datetime
 
-client = Groq(api_key="api-key")
+client = Groq(api_key=st.secrets["api_key"])
 
 # Custom CSS for better styling
 st.markdown("""
