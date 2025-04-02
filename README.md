@@ -2,7 +2,7 @@
 
 A Streamlit web application that generates professional job descriptions levraging AI. Designed for HR professionals and hiring managers.
 
-![App Screenshot](https://github.com/user-attachments/assets/a13d7dbe-1058-4225-ac08-538e1d6d409a)
+![App Screenshot](https://github.com/user-attachments/assets/cd7604d7-1493-497e-bef3-324ebea1c17a)
 
 ## Features ✨
 
