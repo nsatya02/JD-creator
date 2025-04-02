@@ -2,26 +2,36 @@ import streamlit as st
 from groq import Groq
 from datetime import datetime
 
-client = Groq(api_key=st.secrets["api_key"])
+client = Groq(api_key="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")
 
 # Custom CSS for better styling
 st.markdown("""
 <style>
+    body {
+        background-color: #F4F6F7; /* Light background */
+        font-family: 'Arial', sans-serif; /* Modern font */
+    }
     .header {
-        font-size: 24px !important;
+        font-size: 28px !important; /* Increased font size */
         color: #2E86C1;
-        margin-bottom: 20px;
+        margin-bottom: 30px; /* Increased margin */
     }
     .stTextInput>div>div>input, .stTextArea>div>div>textarea {
         background-color: #FBFCFC;
         border: 1px solid #AED6F1;
+        border-radius: 8px; /* Rounded corners */
+        padding: 10px; /* Added padding */
     }
     .stButton>button {
         background-color: #2E86C1 !important;
         color: white !important;
         border: none;
-        padding: 10px 24px;
+        padding: 12px 28px; /* Increased padding */
         border-radius: 5px;
+        transition: background-color 0.3s; /* Smooth transition */
+    }
+    .stButton>button:hover {
+        background-color: #1A5276 !important; /* Darker shade on hover */
     }
 </style>
 """, unsafe_allow_html=True)
@@ -44,7 +54,11 @@ def generate_job_description(role, skills, experience_level, years_experience=No
 
     Structure with these sections:
     - Job Title (include seniority based on experience)
-    - Company Overview
+    - Company Overview 
+    BeamX TechLabs Pvt Ltd. is a leading technology company specialised in software development and IT
+    solutions. With a focus on innovation and cutting-edge technologies, we strive to provide exceptional
+    solutions to our clients across various industries. Join our dynamic team and contribute to the
+    development of groundbreaking software applications
     - Position Summary
     - Key Responsibilities (include experience-specific tasks if applicable)
     - Required Skills and Qualifications ({exp_section}include specific experience requirements)
@@ -83,7 +97,7 @@ def main():
     </style>
     """, unsafe_allow_html=True)
     
-    st.markdown('<div class="header">🚀 Job Description Creator</div>', unsafe_allow_html=True)
+    st.title('🚀 Job Description Creator')
     
     # Initialize session state
     if 'experience_level' not in st.session_state:
@@ -98,25 +112,25 @@ def main():
     )
     
     with st.form(key='jd_form'):
-        col1, col2 = st.columns(2)
-        with col1:
-            role = st.text_input("Job Role/Title*", placeholder="e.g., Software Engineer")
-            company_name = st.text_input("Company Name (optional)", placeholder="Acme Corp")
+        #col1, col2 = st.columns(2)
+        #with col1:
+        role = st.text_input("Job Role/Title*", placeholder="e.g., Software Engineer")
+            #company_name = st.text_input("Company Name (optional)", placeholder="Acme Corp")
             
-        with col2:
+        #with col2:
             # Show slider only for experienced candidates
-            if st.session_state.experience_level == "Experienced":
-                years_experience = st.slider(
-                    "Years of Experience Required",
-                    min_value=1, 
-                    max_value=20,
-                    value=5,
-                    help="Select minimum years of experience required"
-                )
-            else:
-                years_experience = None
-                
-            location = st.text_input("Location (optional)", placeholder="New York, NY")
+        if st.session_state.experience_level == "Experienced":
+            years_experience = st.slider(
+                "Years of Experience Required",
+                min_value=1, 
+                max_value=20,
+                value=5,
+                help="Select minimum years of experience required"
+            )
+        else:
+            years_experience = None
+            
+        location = st.text_input("Location*", placeholder="New York, NY")
         
         skills = st.text_area(
             "Required Skills*", 
@@ -128,9 +142,8 @@ def main():
         submitted = st.form_submit_button("Generate Job Description")
     
     if submitted:
-        # Rest of the code remains the same...
-        if not role or not skills:
-            st.warning("Please fill required fields (Role and Skills)")
+        if not role or not skills or not location:
+            st.warning("Please fill all the fields (Role, Skills, and location)")
             return
         
         with st.spinner(f"Creating {st.session_state.experience_level} JD..."):
@@ -139,7 +152,7 @@ def main():
                 skills=skills,
                 experience_level=st.session_state.experience_level,
                 years_experience=years_experience,
-                company_name=company_name,
+                #company_name=company_name,
                 location=location
             )
         
@@ -150,8 +163,8 @@ def main():
             
             # Download functionality
             timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-            exp_suffix = f"_{years_experience}yoe" if years_experience else ""
-            filename = f"{role.replace(' ', '_')}{exp_suffix}_{timestamp}.txt"
+            exp_suffix = f"_{years_experience} YOE" if years_experience else ""
+            filename = f"{role.replace(' ', '_')}{exp_suffix}.txt"
             
             st.download_button(
                 label="Download JD",
@@ -164,7 +177,7 @@ if __name__ == "__main__":
     main()
 
 
-# "---------------"
+
 # '''
 # Advanced Improvements You Can Add:
 
